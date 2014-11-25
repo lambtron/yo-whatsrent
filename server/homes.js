@@ -21,8 +21,19 @@ var Homes = {};
  */
 
 Homes.get = function *get(user) {
-  var addressObj = yield geo.reverseGeocode(user.lat, user.lng);
-  var address = addressObj.results[0].formatted_address;
+  var geos = yield geo.reverseGeocode(user.lat, user.lng);
+  var address = geos.results[0].formatted_address;
+  var array = address.split(',');
+  var load = {
+    address: array[0].trim(),
+    city: array[1].trim(),
+    state: array[2].split(' ')[0],
+    zip: array[2].split(' ')[1],
+    rentestimate: true
+  };
+  var zillow = yield Zillow.getDeepSearchResults(load);
+  // What if no result? How to get nearby address?
+  return link;
 };
 
 
