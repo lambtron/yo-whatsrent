@@ -3,10 +3,10 @@
  * Module dependencies.
  */
 
-var geocoder = require('geocoder');
-var thunkify = require('thunkify');
 var Zillow = require('../lib/zillow');
-var reverseGeocode = thunkify(geocode.reverseGeocode);
+var Geocoder = require('geocoder');
+var thunkify = require('thunkify');
+var geo = thunkify(Geocode);
 
 /**
  * Define `Homes`.
@@ -21,8 +21,8 @@ var Homes = {};
  */
 
 Homes.get = function *get(user) {
-  var address = yield reverseGeocode(user.lat, user.lng);
-  console.log(address);
+  var addressObj = yield geo.reverseGeocode(user.lat, user.lng);
+  var address = addressObj.results[0].formatted_address;
 };
 
 
