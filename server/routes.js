@@ -27,35 +27,23 @@ Routes.index = function *index() {
 Routes.getYo = function *getYo() {
   var username = this.request.query.username;
   var location = this.request.query.location;
-  var lat = location.substring(0, location.indexOf(';'));
-  var lng = location.substring(location.indexOf(';') + 1);
   var user = {
     username: username,
-    location: [ parseFloat(lng), parseFloat(lat) ],
-    lastSeenAt: new Date
+    lat: location.substring(0, location.indexOf(';')),
+    lng: location.substring(location.indexOf(';') + 1)
   };
   var link = '';
   this.body = yield Yo.yo_link(username, link);
 };
 
 /**
- * Show rent prices of homes nearby.
+ * Show rent or prices of homes nearby.
  */
 
-Routes.showRents = function *showRents() {
-  var rents = objectToArray(this.request.query);
-  if (rents.length === 0) return this.body = yield render('404');
-  this.body = yield render('items', { items: rents });
-};
-
-/**
- * Show prices of homes nearby.
- */
-
-Routes.showPrices = function *showPrices() {
-  var prices = objectToArray(this.request.query);
-  if (prices.length === 0) return this.body = yield render('404');
-  this.body = yield render('items', { items: prices });
+Routes.showHomes = function *showHomes() {
+  var homes = objectToArray(this.request.query);
+  if (homes.length === 0) return this.body = yield render('404');
+  this.body = yield render('homes', { homes: homes });
 };
 
 /**

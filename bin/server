@@ -30,7 +30,7 @@ app.use(bodyParser());
 var routes = require('../server/routes.js');
 app.use(route.get('/', routes.index));
 app.use(route.get('/api/yo', routes.getYo));
-app.use(route.get('/rents/', routes.showRents));
+app.use(route.get('/h/', routes.showHomes));
 
 /**
  * Listen on PORT.
