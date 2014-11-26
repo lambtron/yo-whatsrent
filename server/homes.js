@@ -27,15 +27,14 @@ Homes.get = function *get(user) {
   var load = {
     address: array[0].trim(),
     city: array[1].trim(),
-    state: array[2].split(' ')[0],
-    zip: array[2].split(' ')[1],
+    state: array[2].split(' ')[1],
+    zip: array[2].split(' ')[2],
     rentestimate: true
   };
   var zillow = yield Zillow.getDeepSearchResults(load);
   // What if no result? How to get nearby address?
   return link;
 };
-
 
 /**
  * Expose `Homes`.

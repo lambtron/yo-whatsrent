@@ -24,6 +24,8 @@
     "koa-route": "^2.2.0",
     "node-bitlyapi": "^0.4.0",
     "node-zillow": "0.0.2",
+    "request": "^2.48.0",
+    "superagent": "^0.21.0",
     "swig": "^1.4.2",
     "thunkify-wrap": "^1.0.4",
     "urlencode": "^0.2.0",
