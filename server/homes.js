@@ -3,12 +3,12 @@
  * Module dependencies.
  */
 
-var domain = 'http://yo-whatsrent.herokuapp.com/';
+var domain = 'http://yo-whatsrent.herokuapp.com/h/';
 var Kimono = require('../lib/kimono');
-var Zillow = require('../lib/zillow');
-var Geocoder = require('geocoder');
-var thunkify = require('thunkify');
-var geo = thunkify(Geocode);
+// var Zillow = require('../lib/zillow');
+// var Geocoder = require('geocoder');
+// var thunkify = require('thunkify');
+// var geo = thunkify(Geocode);
 
 /**
  * Define `Homes`.
@@ -37,7 +37,7 @@ Homes.get = function *get(user) {
   // What if no result? How to get nearby address?
 
   // Alternative.
-  var avgPrice = yield Kimono.get(lat, lng);
+  var avgPrice = yield Kimono.get(user.lat, user.lng);
   // Build query string.
   return domain + buildQueryString(avgPrice);
 };

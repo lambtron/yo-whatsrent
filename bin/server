@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 
+var bodyParser = require('koa-bodyparser');
 var logger = require('koa-logger');
 var route = require('koa-route');
 var koa = require('koa');
-var bodyParser = require('koa-bodyparser');
 var PORT = process.env.PORT || 3000;
 
 /**

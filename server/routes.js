@@ -4,6 +4,7 @@
  */
 
 var render = require('../lib/render');
+var Homes = require('./homes');
 var Yo = require('../lib/yo');
 
 /**
@@ -32,7 +33,7 @@ Routes.getYo = function *getYo() {
     lat: parseFloat(location.substring(0, location.indexOf(';'))),
     lng: parseFloat(location.substring(location.indexOf(';') + 1))
   };
-  var link = '';
+  var link = yield Homes.get(user);
   this.body = yield Yo.yo_link(username, link);
 };
 
