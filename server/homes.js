@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 
+var domain = 'http://yo-whatsrent.herokuapp.com/';
 var Kimono = require('../lib/kimono');
 var Zillow = require('../lib/zillow');
 var Geocoder = require('geocoder');
@@ -36,10 +37,9 @@ Homes.get = function *get(user) {
   // What if no result? How to get nearby address?
 
   // Alternative.
-  var data = yield Kimono.get(lat, lng);
-  // Normalize data.
+  var avgPrice = yield Kimono.get(lat, lng);
   // Build query string.
-  return link;
+  return domain + buildQueryString(avgPrice);
 };
 
 /**
@@ -49,30 +49,11 @@ Homes.get = function *get(user) {
 module.exports = Homes;
 
 /**
- * Private function to normalize home prices.
- *
- * TODO: generalize this function, too tightly coupled with data format from Kimono
- *
- * @param {Array} homes
- * @return {Integer}
- */
-
-function normalizer(homes) {
-  var totalBedrooms = 0;
-  var totalPrice = 0;
-  homes.forEach(function(home) {
-    if (home.apt_title.text.slice(1, 3) === 'bd' && home.price.length < 8) {
-      totalBedrooms += parseInt(home.apt_title.text.slice(0, 1));
-      totalPrice += parseInt(home.price.replace('$', '').replace(',', ''));
-    }
-  });
-  return totalPrice.length / totalBedrooms.length;
-}
-
-/**
  * Private function to build querystring.
  *
  */
 
-function buildQueryString() {
+function buildQueryString(price) {
+  var q = '?price=' + price;
+  return q;
 }
